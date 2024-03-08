@@ -32,7 +32,6 @@ function activate(img) {
 }
 
 function replace(img) {
-    console.log(img.id)
     if (img.src.match("images/green.gif")) {
         b[parseInt(img.id)] = 0;
         img.src = "images/red.gif";
