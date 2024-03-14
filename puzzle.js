@@ -1,7 +1,6 @@
-var b = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0, 0]);
-var simulate = false;
-
-var combinations = [
+let simulate = false;
+const b = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+const combinations = [
     [0, 2, 5, 6, 7],
     [4, 6, 7, 8],
     [0, 2, 3, 7, 8],
@@ -15,9 +14,9 @@ var combinations = [
 function activate(img) {
     if (document.getElementById("solve").disabled == true) return;
 
+    const id = parseInt(img.id);
+    replace(img);
     if (simulate) {
-        const id = parseInt(img.id);
-        replace(img);
         const up = id >= 3 ? id - 3 : undefined;
         const down = id < 6 ? id + 3 : undefined;
         const left = id % 3 !== 0 ? id - 1 : undefined;
@@ -26,17 +25,16 @@ function activate(img) {
         if (down != undefined) replace(document.getElementById(down));
         if (left != undefined) replace(document.getElementById(left));
         if (right != undefined) replace(document.getElementById(right));
-    } else {
-       replace(img);
     }
 }
 
 function replace(img) {
+    const id = parseInt(img.id);
     if (img.src.match("images/green.gif")) {
-        b[parseInt(img.id)] = 0;
+        b[id] = 0;
         img.src = "images/red.gif";
     } else {
-        b[parseInt(img.id)] = 1;
+        b[id] = 1;
         img.src = "images/green-in-between.gif";
         setTimeout(function() {
             img.src = "images/green.gif"
@@ -46,11 +44,7 @@ function replace(img) {
 
 function toggleSimulation(document) {
     simulate = !simulate;
-    if (simulate) {
-        document.getElementById("simulate").innerHTML = "Stop Simulation";
-    } else {
-        document.getElementById("simulate").innerHTML = "Simulate";
-    }
+    document.getElementById("simulate").innerHTML = simulate ? "Stop Simulation" : "Simulate";
 }
 
 function solve(document) {
