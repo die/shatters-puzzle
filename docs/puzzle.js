@@ -1,15 +1,5 @@
 let simulate = false;
 const b = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0, 0]);
-const combinations = [
-    [0, 2, 5, 6, 7],
-    [4, 6, 7, 8],
-    [0, 2, 3, 7, 8],
-    [2, 4, 5, 8],
-    [1, 3, 4, 5, 7],
-    [0, 3, 4, 6],
-    [0, 1, 5, 6, 8],
-    [0, 1, 2, 4],
-    [1, 2, 3, 6, 8]];
 
 function activate(img) {
     if (document.getElementById("solve").disabled == true) return;
@@ -48,12 +38,20 @@ function toggleSimulation(document) {
 }
 
 function solve(document) {
-    let solutions = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    for (let i = 0; i < combinations.length; i++) {
-        for (let j = 0; j < combinations[i].length; j++) {
-            solutions[i] ^= (1 ^ b[combinations[i][j]]);
-        }
-    }
+
+    const combinations = [
+        [0, 2, 5, 6, 7],
+        [4, 6, 7, 8],
+        [0, 2, 3, 7, 8],
+        [2, 4, 5, 8],
+        [1, 3, 4, 5, 7],
+        [0, 3, 4, 6],
+        [0, 1, 5, 6, 8],
+        [0, 1, 2, 4],
+        [1, 2, 3, 6, 8]];
+
+
+    const solutions = combinations.map(combination => combination.reduce((acc, index) => acc ^ (1 ^ puzzle[index]), 0));
 
     for (let i = 0; i < solutions.length; i++) {
         if (solutions[i] != 1) document.getElementById(i).style = "opacity: 0.3;"
