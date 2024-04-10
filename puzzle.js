@@ -51,7 +51,7 @@ function solve(document) {
         [1, 2, 3, 6, 8]];
 
 
-    const solutions = combinations.map(combination => combination.reduce((acc, index) => acc ^ (1 ^ puzzle[index]), 0));
+    const solutions = combinations.map(combination => combination.reduce((acc, index) => acc ^ (1 ^ b[index]), 0));
 
     for (let i = 0; i < solutions.length; i++) {
         if (solutions[i] != 1) document.getElementById(i).style = "opacity: 0.3;"
